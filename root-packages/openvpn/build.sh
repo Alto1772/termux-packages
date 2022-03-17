@@ -23,10 +23,10 @@ NETSTAT=$TERMUX_PREFIX/bin/netstat
 "
 
 termux_step_pre_configure() {
-	CFLAGS="-I$TERMUX_PREFIX/include/openssl-1.1 $CFLAGS"
-	CPPFLAGS="-I$TERMUX_PREFIX/include/openssl-1.1 $CPPFLAGS"
-	CXXFLAGS="-I$TERMUX_PREFIX/include/openssl-1.1 $CXXFLAGS"
-	LDFLAGS="-L$TERMUX_PREFIX/lib/openssl-1.1 -Wl,-rpath=$TERMUX_PREFIX/lib/openssl-1.1 $LDFLAGS"	
+	CFLAGS="-I$TERMUX_PREFIX/opt/openssl1.1/include $CFLAGS"
+	CPPFLAGS="-I$TERMUX_PREFIX/opt/openssl1.1/include $CPPFLAGS"
+	CXXFLAGS="-I$TERMUX_PREFIX/opt/openssl1.1/include $CXXFLAGS"
+	LDFLAGS="-L$TERMUX_PREFIX/opt/openssl1.1/lib -Wl,-rpath=$TERMUX_PREFIX/opt/openssl1.1/lib $LDFLAGS"	
 }
 
 termux_step_post_make_install() {

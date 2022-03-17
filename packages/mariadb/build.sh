@@ -3,6 +3,7 @@ TERMUX_PKG_DESCRIPTION="A drop-in replacement for mysql server"
 TERMUX_PKG_LICENSE="GPL-2.0"
 TERMUX_PKG_MAINTAINER="@termux"
 TERMUX_PKG_VERSION=2:10.9.2
+TERMUX_PKG_REVISION=0.1
 TERMUX_PKG_SRCURL=http://ftp.hosteurope.de/mirror/archive.mariadb.org/mariadb-${TERMUX_PKG_VERSION:2}/source/mariadb-${TERMUX_PKG_VERSION:2}.tar.gz
 TERMUX_PKG_SHA256=5f45ff75e043966555a95fbdb8f092e60ce2a6c47ba59d144db46e138e922f48
 TERMUX_PKG_DEPENDS="libc++, libiconv, liblzma, ncurses, libedit, openssl, pcre2, libcrypt, libandroid-support, libandroid-glob, zlib, liblz4"
@@ -53,6 +54,13 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DWITH_INNODB_SNAPPY=OFF
 -DWITH_UNIT_TESTS=OFF
 -DINSTALL_SYSCONFDIR=$TERMUX_PREFIX/etc
+<<<<<<< HEAD
+=======
+-DOPENSSL_INCLUDE_DIR=$TERMUX_PREFIX/opt/openssl1.1/include
+-DOPENSSL_LIBRARIES=$TERMUX_PREFIX/opt/openssl1.1/lib
+-DOPENSSL_CRYPTO_LIBRARY=$TERMUX_PREFIX/opt/openssl1.1/lib/libcrypto.so.1.1
+-DOPENSSL_SSL_LIBRARY=$TERMUX_PREFIX/opt/openssl1.1/lib/libssl.so.1.1
+>>>>>>> 2c11cc26f (single)
 "
 TERMUX_PKG_HOSTBUILD=true
 TERMUX_CMAKE_BUILD="Unix Makefiles"
@@ -100,6 +108,13 @@ termux_step_pre_configure() {
 	fi
 	sed -i 's/^\s*END[(][)]/ENDIF()/g' $TERMUX_PKG_SRCDIR/libmariadb/cmake/ConnectorName.cmake
 
+<<<<<<< HEAD
+=======
+	CFLAGS="-I$TERMUX_PREFIX/opt/openssl1.1/include $CFLAGS"
+	CPPFLAGS="-I$TERMUX_PREFIX/opt/openssl1.1/include $CPPFLAGS"
+	CXXFLAGS="-I$TERMUX_PREFIX/opt/openssl1.1/include $CXXFLAGS"
+	LDFLAGS="-L$TERMUX_PREFIX/opt/openssl1.1/lib -Wl,-rpath=$TERMUX_PREFIX/opt/openssl1.1/lib $LDFLAGS"
+>>>>>>> 2c11cc26f (single)
 }
 
 termux_step_post_massage() {

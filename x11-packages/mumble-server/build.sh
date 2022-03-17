@@ -12,10 +12,10 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -Dice=OFF
 -Doverlay=OFF
 -Dwarnings-as-errors=OFF
--DOPENSSL_INCLUDE_DIR=$TERMUX_PREFIX/include/openssl-1.1
--DOPENSSL_LIBRARIES=$TERMUX_PREFIX/lib/openssl-1.1
--DOPENSSL_CRYPTO_LIBRARY=$TERMUX_PREFIX/lib/openssl-1.1/libcrypto.so.1.1
--DOPENSSL_SSL_LIBRARY=$TERMUX_PREFIX/lib/openssl-1.1/libssl.so.1.1
+-DOPENSSL_INCLUDE_DIR=$TERMUX_PREFIX/opt/openssl1.1/include
+-DOPENSSL_LIBRARIES=$TERMUX_PREFIX/opt/openssl1.1/lib
+-DOPENSSL_CRYPTO_LIBRARY=$TERMUX_PREFIX/opt/openssl1.1/lib/libcrypto.so.1.1
+-DOPENSSL_SSL_LIBRARY=$TERMUX_PREFIX/opt/openssl1.1/lib/libssl.so.1.1
 "
 
 termux_step_pre_configure() {
@@ -23,10 +23,10 @@ termux_step_pre_configure() {
 
 	LDFLAGS+=" -lcap"
 
-	CFLAGS="-I$TERMUX_PREFIX/include/openssl-1.1 $CFLAGS"
-	CPPFLAGS="-I$TERMUX_PREFIX/include/openssl-1.1 $CPPFLAGS"
-	CXXFLAGS="-I$TERMUX_PREFIX/include/openssl-1.1 $CXXFLAGS"
-	LDFLAGS="-L$TERMUX_PREFIX/lib/openssl-1.1 -Wl,-rpath=$TERMUX_PREFIX/lib/openssl-1.1 $LDFLAGS"
+	CFLAGS="-I$TERMUX_PREFIX/opt/openssl1.1/include $CFLAGS"
+	CPPFLAGS="-I$TERMUX_PREFIX/opt/openssl1.1/include $CPPFLAGS"
+	CXXFLAGS="-I$TERMUX_PREFIX/opt/openssl1.1/include $CXXFLAGS"
+	LDFLAGS="-L$TERMUX_PREFIX/opt/openssl1.1/lib -Wl,-rpath=$TERMUX_PREFIX/opt/openssl1.1/lib $LDFLAGS"
 	
 
 }

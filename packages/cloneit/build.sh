@@ -24,13 +24,13 @@ termux_step_post_get_source() {
 
 termux_step_pre_configure() {
 	# openssl-sys supports OpenSSL 3 in >= 0.9.69
-	export OPENSSL_INCLUDE_DIR=$TERMUX_PREFIX/include/openssl-1.1
-	export OPENSSL_LIB_DIR=$TERMUX_PREFIX/lib/openssl-1.1
-	CFLAGS="-I$TERMUX_PREFIX/include/openssl-1.1 $CFLAGS"
-	CPPFLAGS="-I$TERMUX_PREFIX/include/openssl-1.1 $CPPFLAGS"
-	CXXFLAGS="-I$TERMUX_PREFIX/include/openssl-1.1 $CXXFLAGS"
-	LDFLAGS="-L$TERMUX_PREFIX/lib/openssl-1.1 -Wl,-rpath=$TERMUX_PREFIX/lib/openssl-1.1 $LDFLAGS"
-	RUSTFLAGS+=" -C link-arg=-Wl,-rpath=$TERMUX_PREFIX/lib/openssl-1.1"
+	export OPENSSL_INCLUDE_DIR=$TERMUX_PREFIX/opt/openssl1.1/include
+	export OPENSSL_LIB_DIR=$TERMUX_PREFIX/opt/openssl1.1/lib
+	CFLAGS="-I$TERMUX_PREFIX/opt/openssl1.1/include $CFLAGS"
+	CPPFLAGS="-I$TERMUX_PREFIX/opt/openssl1.1/include $CPPFLAGS"
+	CXXFLAGS="-I$TERMUX_PREFIX/opt/openssl1.1/include $CXXFLAGS"
+	LDFLAGS="-L$TERMUX_PREFIX/opt/openssl1.1/lib -Wl,-rpath=$TERMUX_PREFIX/opt/openssl1.1/lib $LDFLAGS"
+	RUSTFLAGS+=" -C link-arg=-Wl,-rpath=$TERMUX_PREFIX/opt/openssl1.1/lib"
 }
 
 termux_step_make() {

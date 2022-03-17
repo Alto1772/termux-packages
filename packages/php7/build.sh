@@ -3,6 +3,7 @@ TERMUX_PKG_DESCRIPTION="Server-side, HTML-embedded scripting language"
 TERMUX_PKG_LICENSE="PHP-3.0"
 TERMUX_PKG_MAINTAINER="@xtkoba"
 TERMUX_PKG_VERSION=7.4.33
+TERMUX_PKG_REVISION=0.1
 TERMUX_PKG_SRCURL=https://github.com/php/php-src/archive/php-${TERMUX_PKG_VERSION}.tar.gz
 TERMUX_PKG_SHA256=dfbb2111160589054768a37086bda650a0041c89878449d078684d70d6a0e411
 # Build native php for phar to build (see pear-Makefile.frag.patch):
@@ -80,10 +81,10 @@ termux_step_pre_configure() {
 	chmod +x $TERMUX_PKG_TMPDIR/apxs-wrapper.sh
 	cat $TERMUX_PKG_TMPDIR/apxs-wrapper.sh
 
-	CFLAGS="-I$TERMUX_PREFIX/include/openssl-1.1 $CFLAGS"
-	CPPFLAGS="-I$TERMUX_PREFIX/include/openssl-1.1 $CPPFLAGS"
-	CXXFLAGS="-I$TERMUX_PREFIX/include/openssl-1.1 $CXXFLAGS"
-	LDFLAGS="-L$TERMUX_PREFIX/lib/openssl-1.1 -Wl,-rpath=$TERMUX_PREFIX/lib/openssl-1.1 $LDFLAGS"
+	CFLAGS="-I$TERMUX_PREFIX/opt/openssl1.1/include $CFLAGS"
+	CPPFLAGS="-I$TERMUX_PREFIX/opt/openssl1.1/include $CPPFLAGS"
+	CXXFLAGS="-I$TERMUX_PREFIX/opt/openssl1.1/include $CXXFLAGS"
+	LDFLAGS="-L$TERMUX_PREFIX/opt/openssl1.1/lib -Wl,-rpath=$TERMUX_PREFIX/opt/openssl1.1/lib $LDFLAGS"
 
 	local wrapper_bin=$TERMUX_PKG_BUILDDIR/_wrapper/bin
 	local _cc=$(basename $CC)
@@ -91,7 +92,7 @@ termux_step_pre_configure() {
 	mkdir -p $wrapper_bin
 	cat <<-EOF > $wrapper_bin/$_cc
 		#!$(command -v sh)
-		exec $(command -v $_cc) -L$TERMUX_PREFIX/lib/openssl-1.1 \
+		exec $(command -v $_cc) -L$TERMUX_PREFIX/opt/openssl1.1/lib \
 			-Wno-unused-command-line-argument "\$@"
 	EOF
 	chmod 0700 $wrapper_bin/$_cc

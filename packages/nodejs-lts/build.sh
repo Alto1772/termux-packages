@@ -3,7 +3,7 @@ TERMUX_PKG_DESCRIPTION="Open Source, cross-platform JavaScript runtime environme
 TERMUX_PKG_LICENSE="MIT"
 TERMUX_PKG_MAINTAINER="Yaksh Bariya <yakshbari4@gmail.com>"
 TERMUX_PKG_VERSION=16.18.0
-TERMUX_PKG_REVISION=1
+TERMUX_PKG_REVISION=1.1
 TERMUX_PKG_SRCURL=https://nodejs.org/dist/v${TERMUX_PKG_VERSION}/node-v${TERMUX_PKG_VERSION}.tar.xz
 TERMUX_PKG_SHA256=fcfe6ad2340f229061d3e81a94df167fe3f77e01712dedc0144a0e7d58e2c69b
 # Note that we do not use a shared libuv to avoid an issue with the Android
@@ -78,8 +78,8 @@ termux_step_configure() {
 	if [ "${TERMUX_PKG_VERSION%%.*}" != "16" ]; then
 		termux_error_exit 'Please migrate to using openssl (instead of openssl-1.1).'
 	else
-		_SHARED_OPENSSL_INCLUDES=$TERMUX_PREFIX/include/openssl-1.1
-		_SHARED_OPENSSL_LIBPATH=$TERMUX_PREFIX/lib/openssl-1.1
+		_SHARED_OPENSSL_INCLUDES=$TERMUX_PREFIX/opt/openssl1.1/include
+		_SHARED_OPENSSL_LIBPATH=$TERMUX_PREFIX/opt/openssl1.1/lib
 		LDFLAGS="-Wl,-rpath=$_SHARED_OPENSSL_LIBPATH $LDFLAGS"
 	fi
 

@@ -10,8 +10,8 @@ TERMUX_PKG_DEPENDS="gdk-pixbuf, glib, gtk3, libcairo, libhandy-0.0, libsqlite, l
 TERMUX_PKG_BUILD_IN_SRC=true
 
 termux_step_pre_configure() {
-	CPPFLAGS="-I$TERMUX_PREFIX/include/openssl-1.1 $CPPFLAGS"
-	RUSTFLAGS+=" -C link-arg=-Wl,-rpath=$TERMUX_PREFIX/lib/openssl-1.1"
+	CPPFLAGS="-I$TERMUX_PREFIX/opt/openssl1.1/include $CPPFLAGS"
+	RUSTFLAGS+=" -C link-arg=-Wl,-rpath=$TERMUX_PREFIX/opt/openssl1.1/lib"
 
 	TERMUX_RUST_VERSION=1.52.1
 	termux_setup_rust
@@ -50,7 +50,7 @@ termux_step_pre_configure() {
 	$AR cru $libintl_a $wrapper_tmp/gettext.o
 	local lib
 	for lib in crypto ssl; do
-		ln -s $TERMUX_PREFIX/lib/openssl-1.1/lib${lib}.so \
+		ln -s $TERMUX_PREFIX/opt/openssl1.1/lib/lib${lib}.so \
 			$_CARGO_TARGET_LIBDIR/
 	done
 }
